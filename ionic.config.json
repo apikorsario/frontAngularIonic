@@ -1,0 +1,7 @@
+{
+  "name": "KorsarioFront",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

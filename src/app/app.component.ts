@@ -1,47 +1,59 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GravatarService } from '@infinitycube/gravatar';
-import { LoadingController, NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { IMenuPage } from './shared/interfaces/menu-page';
 import { IUserRes } from './shared/interfaces/responses/user-res';
 import { ToastModel } from './shared/models/toast.model';
 import { AuthService } from './shared/services/auth.service';
+import { StorageService } from './shared/services/storage.service';
 import { UserService } from './shared/services/user.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
+  public appSignPages: Array<IMenuPage>;
   public appPublicPages: Array<IMenuPage>;
-  public appAuthPages: Array<IMenuPage>;
-  public isAuth: boolean;
-  public subscription: Subscription;
+  public appCustomerPages: Array<IMenuPage>;
+  public appEmployeePages: Array<IMenuPage>;
   public user: IUserRes;
   public avatar: string;
+  public darkTheme: boolean;
 
   constructor(
     private _authService: AuthService,
     private _userService: UserService,
-    private _loadingCtrl: LoadingController,
     private _navCtrl: NavController,
-    private _gravatarService: GravatarService
+    private _gravatarService: GravatarService,
+    private _storageService: StorageService
   ) {
+    this.loadLogged();
+    this.clickedChangeTheme(true);
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  async clickedChangeTheme(loadStorage: boolean) {
+    let key = 'themeStyle';
+    this.darkTheme = loadStorage ? await this._storageService.get({ key }) : !this.darkTheme;
+    document.body.setAttribute(key, this.darkTheme ? 'dark' : 'light');
+    if (event) this._storageService.set({ key, value: this.darkTheme });
   }
 
   ngOnInit(): void {
-    this.loadPublicPages();
-    this.loadAuthPages();
-    this.loadLogged();
     this.loadUser();
+    this.fillPublicPages();
+    this.fillSignPages();
+    this.fillCustomerPages();
+    this.fillEmployeePages();
   }
 
-  loadUser() {
-    if (!this.isAuth) return;
+  async loadUser() {
+    if (!await this.isLogged()) {
+      this.user = null;
+      this.avatar = null;
+      return
+    };
     this._userService.getProfile().subscribe(
       res => {
         this.user = res.data;
@@ -52,45 +64,56 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   loadLogged() {
-    this.subscription = this._authService.$isLogged.subscribe(
-      res => this.loadAuthPages(),
-      err => console.log(err)
+    this._authService.$isLogged.subscribe(
+      res => this.ngOnInit(),
+      err => this.ngOnInit()
     )
   }
 
-  loadPublicPages() {
+  fillPublicPages() {
     this.appPublicPages = [
-      { title: 'Ingresar', url: '/auth', icon: 'log-in', visible: true },
-      { title: 'Productos', url: '/products', icon: 'grid', visible: true }
+      { title: 'Inicio', url: '/home', icon: 'home' }
     ];
   }
 
-  async loadAuthPages() {
-    if (await this._authService.isValidToken()) {
-      this.appAuthPages = [
-        { title: 'Mi Codigo Qr', url: '/auth/qr-code', icon: 'qr-code', visible: true },
-        { title: 'Casillero', url: '/auth/locker', icon: 'file-tray-full', visible: true },
-        { title: 'Facturas', url: '/auth/invoices', icon: 'create', visible: true },
+  async fillSignPages() {
+    this.appSignPages = [];
+    if (!await this._authService.isLogged()) {
+      this.appSignPages = [
+        { title: 'Iniciar Sesión', url: '/sign-in', icon: 'log-in' },
+        { title: 'Registrarme', url: '/sign-up', icon: 'create' }
       ];
-      this.appPublicPages.find(p => p.url == '/auth').visible = false;
-      this.isAuth = true;
-      this.loadUser();
-    } else {
-      this.isAuth = false;
-      this.appAuthPages = [];
-      this.appPublicPages.find(p => p.url == '/auth').visible = true;
     }
   }
 
+  async fillCustomerPages() {
+    this.appCustomerPages = [];
+    if (await this._authService.haveRole('Customer')) {
+      this.appCustomerPages = [
+        { title: 'Mi Codigo Qr', url: '/auth/qr-code', icon: 'qr-code' },
+        { title: 'Casillero', url: '/auth/locker', icon: 'file-tray-full' },
+        { title: 'Facturas', url: '/auth/invoices', icon: 'create' },
+      ];
+    }
+  }
+
+  async fillEmployeePages() {
+    this.appEmployeePages = [];
+    if (await this._authService.haveRole('Employee')) {
+      this.appEmployeePages = [
+        { title: 'Ruta Empleado', url: '/auth/admin', icon: 'key' }
+      ];
+    }
+  }
+
+  isLogged() {
+    return this._authService.isLogged();
+  }
+
   async logOut() {
-    (await this._loadingCtrl.create()).present();
     await this._authService.logOut();
-    this.isAuth = false;
-    this.loadAuthPages();
-    setTimeout(() => {
-      this._loadingCtrl.dismiss();
-      ToastModel.showSuccess('hasta luego!');
-      this._navCtrl.navigateRoot('/');
-    }, 500);
+    this.ngOnInit();
+    ToastModel.showSuccess('hasta luego!');
+    this._navCtrl.navigateRoot('/');
   }
 }

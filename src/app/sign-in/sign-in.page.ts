@@ -1,28 +1,28 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { LoadingController, NavController } from '@ionic/angular';
-import { ToastModel } from 'src/app/shared/models/toast.model';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { ToastModel } from '../shared/models/toast.model';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
-  selector: 'app-signin',
-  templateUrl: './signin.component.html'
+  selector: 'app-sign-in',
+  templateUrl: './sign-in.page.html'
 })
-export class SigninComponent implements OnInit {
-  @Input() email: string;
+export class SignInPage implements OnInit {
   public formSignIn: FormGroup;
-
-  @Output() $goSignUp : EventEmitter<any>;
+  public email: string;
 
   constructor(
     private _authService: AuthService,
     private _navCtrl: NavController,
-    private _loadingCtrl: LoadingController
+    private _loadingCtrl: LoadingController,
+    private _activateRoute: ActivatedRoute
   ) {
-    this.$goSignUp = new EventEmitter();
   }
 
   ngOnInit() {
+    this.email = this._activateRoute.snapshot.paramMap.get('email') || null;
     this.generateForm();
   }
 
@@ -53,8 +53,8 @@ export class SigninComponent implements OnInit {
     (await this._loadingCtrl.create()).present();
     this._authService.SignIn(this.formSignIn.value).subscribe(
       res => {
-        this._authService.logged(res.data);
-        ToastModel.showSuccess(`Bienvenido`);
+        this._authService.logIn(res.data);
+        ToastModel.showSuccess(`Bienvenid@`);
         this._loadingCtrl.dismiss();
         this._navCtrl.navigateRoot('/');
       },
@@ -64,9 +64,4 @@ export class SigninComponent implements OnInit {
       }
     )
   }
-
-  clickedSignUp(){
-    this.$goSignUp.emit();
-  }
-
 }

@@ -5,8 +5,8 @@ import { ISignInReq } from "../interfaces/requests/signin-req";
 import { ISignUpReq } from "../interfaces/requests/signup-req";
 import { BaseService } from "./base.service";
 import { Plugins } from "@capacitor/core";
-import { from, Subject } from "rxjs";
 import { IResponse } from "../interfaces/responses/response-res";
+import { ITokenData } from "../interfaces/token-data";
 
 const { Storage } = Plugins;
 
@@ -42,26 +42,11 @@ export class AuthService extends BaseService {
     }
 
     /**
-     * logged
+     * logIn
      */
-    public async logged(token: string) {
+    public async logIn(token: string) {
         await Storage.set({ key: 'token', value: token });
         this.$isLogged.emit(true);
-    }
-
-    /**
-     * isValidToken
-     */
-    public async isValidToken() {
-        let token = (await Storage.get({ key: 'token' })).value;
-        try {
-            let data = token.split('.')[1];
-            let auth: any = JSON.parse(window.atob(data));
-            let isValid = auth?.UserId ? true : false;
-            return isValid;
-        } catch (error) {
-            return null;
-        }
     }
 
     /**
@@ -69,5 +54,37 @@ export class AuthService extends BaseService {
      */
     public async logOut() {
         await Storage.remove({ key: 'token' });
+        this.$isLogged.emit(false);
     }
+
+    /**
+     * isLogged
+     */
+    public async isLogged() {
+        return !! await this.getDataToken();
+    }
+
+    /**
+     * haveRole
+     */
+    public async haveRole(role: string): Promise<boolean> {
+        let data = await this.getDataToken();
+        if (!data) return null;
+        return this.isString(data.role) ? data.role === role : data.role.includes(role);
+    }
+
+    private async getDataToken() {
+        let token = (await Storage.get({ key: 'token' })).value;
+        try {
+            let data = token.split('.')[1];
+            return JSON.parse(window.atob(data)) as ITokenData || null;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    private isString(value: any): boolean {
+        return typeof (value) === 'string'
+    }
+
 }

@@ -5,21 +5,12 @@ const { Haptics } = Plugins;
 
 export abstract class HapticsModel{
     
-    private static hapticsImpact(style = HapticsImpactStyle.Heavy) {
-        try {
-            Haptics.impact({style: style});
-        } catch (error) {
-            console.log(`this error hapticts is normal in the browser ${error}`);
-        }
-    }
-    
     static light() {
+        if (Platform.prototype.is('mobileweb')) return; 
         try {
-            if (!Platform.prototype.is('mobileweb') ) {
-                HapticsModel.hapticsImpact(HapticsImpactStyle.Light);
-            }
+            Haptics.impact({style: HapticsImpactStyle.Light});
         } catch (error) {
-            console.log(`this error hapticts is normal in the browser ${error}`);
+            return;
         }
     }
 }

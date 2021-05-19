@@ -5,7 +5,6 @@ import { IPopOption } from 'src/app/shared/interfaces/pop-option';
 import { IUserRes } from 'src/app/shared/interfaces/responses/user-res';
 import { UserOptionComponent } from 'src/app/shared/popovers/user-option/user-option.component';
 import { UserService } from 'src/app/shared/services/user.service';
-import { IQrCodeOption } from 'src/app/shared/interfaces/qrcode-option';
 import { ChangePasswordComponent } from 'src/app/shared/modals/change-password/change-password.component';
 import { LockerService } from 'src/app/shared/services/locker.service';
 import { Subscription } from 'rxjs';
@@ -24,7 +23,6 @@ export class ProfilePage implements OnInit {
   public locker: ILockerRes;
   public invoices: Array<IInvoiceRes>;
   public popOptions: Array<IPopOption>;
-  public qrCodeOption: IQrCodeOption;
   public userSubs: Subscription;
   public lockerSubs: Subscription;
   public invoiceSubs: Subscription;
@@ -51,7 +49,6 @@ export class ProfilePage implements OnInit {
       { role: 'qr', title: 'Mi Codigo', icon: 'qr-code', visible: true },
       { role: 'password', title: 'Cambiar Contraceña', icon: 'key', visible: true }
     ];
-    this.qrCodeOption = {encode: this.user.userId, title: 'Mi Codigo QR'}
   }
 
   async loadUser() {

@@ -16,10 +16,8 @@ export class AuthGuard implements CanActivate {
   }
 
   async canActivate(): Promise<boolean | UrlTree> {
-    if (await this._authService.isValidToken()) return true;
-    
-    this._navCtrl.navigateRoot('/');
-    return false;
+    let isCustomer = await this._authService.haveRole('Customer');
+    return isCustomer ? true : this._navCtrl.navigateRoot('/');
   }
 
 }

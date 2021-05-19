@@ -10,7 +10,7 @@
 
     <ion-item (click)="clickedSort(option)" button *ngFor="let option of sortOptions">
         <ion-label class="capitalize">
-            <p [class.t-white]="option.selected">{{ option.sortBy }}</p>
+            <p>{{ option.sortBy }}</p>
         </ion-label>
         <ion-checkbox slot="end" [(ngModel)]="option.selected" mode="ios"></ion-checkbox>
     </ion-item>
@@ -28,14 +28,14 @@
 
     <ion-item (click)="clickedAllCategory()" button>
         <ion-label>
-            <p [class.t-white]="!filterCategory">Todas</p>
+            <p>Todas</p>
         </ion-label>
         <ion-checkbox slot="end" [(ngModel)]="!filterCategory" mode="ios"></ion-checkbox>
     </ion-item>
 
     <ion-item (click)="clickedCategory(category)" button *ngFor="let category of categories">
         <ion-label class="capitalize">
-            <p [class.t-white]="category.selected">{{ category.categoryName }}</p>
+            <p>{{ category.categoryName }}</p>
         </ion-label>
         <ion-checkbox slot="end" [(ngModel)]="category.selected" mode="ios"></ion-checkbox>
     </ion-item>

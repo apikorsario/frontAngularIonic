@@ -1,29 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoadingController, NavController, PopoverController } from '@ionic/angular';
-import { Subscription } from 'rxjs';
-import { ICategoryRes } from 'src/app/shared/interfaces/responses/category-res';
-import { ILockerDetailRes } from 'src/app/shared/interfaces/responses/locker-detail-res';
-import { ILockerRes } from 'src/app/shared/interfaces/responses/locker-res';
-import { IProductRes } from 'src/app/shared/interfaces/responses/product-res';
-import { ISortOption } from 'src/app/shared/interfaces/sort-option';
-import { ConfirmModel } from 'src/app/shared/models/confirm.model';
-import { ToastModel } from 'src/app/shared/models/toast.model';
-import { ProductFilterPopover } from 'src/app/shared/popovers/product-filter/product-filter.popover';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { LockerService } from 'src/app/shared/services/locker.service';
-import { ProductService } from 'src/app/shared/services/product.service';
+import { ICategoryRes } from '../shared/interfaces/responses/category-res';
+import { ILockerDetailRes } from '../shared/interfaces/responses/locker-detail-res';
+import { ILockerRes } from '../shared/interfaces/responses/locker-res';
+import { IProductRes } from '../shared/interfaces/responses/product-res';
+import { ISortOption } from '../shared/interfaces/sort-option';
+import { ConfirmModel } from '../shared/models/confirm.model';
+import { ToastModel } from '../shared/models/toast.model';
+import { ProductFilterPopover } from '../shared/popovers/product-filter/product-filter.popover';
+import { AuthService } from '../shared/services/auth.service';
+import { LockerService } from '../shared/services/locker.service';
+import { ProductService } from '../shared/services/product.service';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.page.html'
+  selector: 'app-home',
+  templateUrl: './home.page.html'
 })
-export class ProductsPage {
+export class HomePage implements OnInit {
   public products: Array<IProductRes>
   public filterCategory: ICategoryRes;
   public filterSort: ISortOption;
   public locker: ILockerRes;
-  public productSub: Subscription;
-  public lockerSub: Subscription;
 
   constructor(
     private _productService: ProductService,
@@ -33,20 +30,22 @@ export class ProductsPage {
     private _loadingCtrl: LoadingController,
     private _navCtrl: NavController,
   ) {
+  }
+  ngOnInit(): void {
     this.loadProducts();
     this.loadLocker();
   }
 
   async loadLocker() {
-    if (!await this._authService.isValidToken()) return;
-    this.lockerSub = this._lockerService.getLocker().subscribe(
+    if (!await this._authService.isLogged()) return;
+    this._lockerService.getLocker().subscribe(
       res => this.locker = res.data
     )
   }
 
-  async loadProducts() {
+  async loadProducts( ) {
     (await this._loadingCtrl.create()).present();
-    this.productSub = this._productService.getProducts().subscribe(
+    this._productService.getProducts().subscribe(
       res => {
         this.products = res.data;
         this._loadingCtrl.dismiss();
@@ -64,8 +63,7 @@ export class ProductsPage {
   }
 
   refreshProduct(event: CustomEvent) {
-    this.productSub.unsubscribe();
-    this.productSub = this._productService.getProducts().subscribe(
+    this._productService.getProducts().subscribe(
       res => {
         this.products = res.data;
         event?.detail.complete();
@@ -75,8 +73,7 @@ export class ProductsPage {
   }
 
   refreshLocker(event: CustomEvent) {
-    this.lockerSub.unsubscribe();
-    this.lockerSub = this._lockerService.getLocker().subscribe(
+    this._lockerService.getLocker().subscribe(
       res => {
         this.locker = res.data;
         event?.detail.complete();

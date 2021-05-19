@@ -1,29 +1,29 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { LoadingController } from '@ionic/angular';
-import { ToastModel } from 'src/app/shared/models/toast.model';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoadingController, NavController } from '@ionic/angular';
+import { IResponse } from '../shared/interfaces/responses/response-res';
+import { ToastModel } from '../shared/models/toast.model';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html'
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.page.html'
 })
-export class SignupComponent implements OnInit {
+export class SignUpPage implements OnInit {
   public formSignUp: FormGroup;
-  @Output() $goSignIn: EventEmitter<any>;
 
   constructor(
     private _authService: AuthService,
-    private _loadingCtrl: LoadingController
+    private _loadingCtrl: LoadingController,
+    private _navCtrl: NavController
   ) {
-    this.$goSignIn = new EventEmitter();
   }
-  
+
   ngOnInit() {
     this.generateForm();
   }
-  
-  generateForm(){
+
+  generateForm() {
     this.formSignUp = new FormGroup({
       firstname: new FormControl(null, [
         Validators.required,
@@ -52,7 +52,13 @@ export class SignupComponent implements OnInit {
     })
   }
 
-  async clickedSignUp(){
+
+  public get email(): string {
+    return this.formSignUp.get('email').value;
+  }
+
+
+  async clickedSignUp() {
     if (this.formSignUp.invalid) {
       this.formSignUp.markAllAsTouched();
       return ToastModel.showError('tiene campos invalidos');
@@ -62,15 +68,17 @@ export class SignupComponent implements OnInit {
     this._authService.SignUp(this.formSignUp.value).subscribe(
       res => {
         ToastModel.showSuccess('Registro con Exito');
-        this.$goSignIn.emit(this.formSignUp.get('email').value);
+        this._loadingCtrl.dismiss();
+        this._navCtrl.navigateRoot('/sign-in', { queryParams: { email: this.email } })
       },
-      err => console.log(err),
-      () => this._loadingCtrl.dismiss()
+      err => {
+        console.log(err);
+        this._loadingCtrl.dismiss();
+        let res = err?.error as IResponse<null> || null;
+        if (res?.errors.includes('user already exists')) 
+          return ToastModel.showError('el usuario ya existe')
+        ToastModel.showError('ocurrio un error inesperado');
+      }
     )
   }
-
-  clickedSignIn(){
-    this.$goSignIn.emit();
-  }
-
 }

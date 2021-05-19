@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mi Perfil</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="clickedPopover($event)">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="w-100 f j-center a-center f-wrap">
+    <ion-card class="f-grow" *ngIf="user">
+      <div class="f a-center">
+        <div class="w-120px h-120px">
+          <img class="w-100 h-100" [src]="avatar">
+        </div>
+        <ion-card-header>
+          <ion-card-title class="capitalize">{{ user.firstName }} {{ user.lastName }}</ion-card-title>
+          <ion-card-subtitle class="lowercase">{{ user.email }}</ion-card-subtitle>
+          <ion-card-subtitle class="capitalize">
+            Fecha de Registro: {{ user.createdDate | date: 'd, MMM, y, h:mm' : 'Z' }}
+          </ion-card-subtitle>
+        </ion-card-header>
+      </div>
+    </ion-card>
+   
+    <ion-card class="f-grow" *ngIf="locker">
+      <ion-card-header>
+        <ion-card-title class="capitalize">Casillero</ion-card-title>
+      </ion-card-header>
+
+      <div class="f j-between a-center">
+        <ion-card-content class="t-right">
+          <ion-card-subtitle class="capitalize">Total Articulos:</ion-card-subtitle>
+          <ion-card-subtitle>Total:</ion-card-subtitle>
+        </ion-card-content>
+
+        <ion-card-content class="t-right">
+          <ion-card-subtitle>{{ locker.itemCount }}</ion-card-subtitle>
+          <ion-card-subtitle>{{ locker.total | currency }}</ion-card-subtitle>
+        </ion-card-content>
+      </div>
+    </ion-card>
+   
+    <ion-card class="f-grow" *ngIf="invoices">
+      <ion-card-header>
+        <ion-card-title class="capitalize">Facturas</ion-card-title>
+      </ion-card-header>
+
+      <div class="f j-between a-center">
+        <ion-card-content class="t-right">
+          <ion-card-subtitle class="capitalize">Total Facturas:</ion-card-subtitle>
+          <ion-card-subtitle>Total en Compras:</ion-card-subtitle>
+        </ion-card-content>
+
+        <ion-card-content class="t-right">
+          <ion-card-subtitle>{{ invoices.length }}</ion-card-subtitle>
+          <ion-card-subtitle>{{ totalBuyed | currency }}</ion-card-subtitle>
+        </ion-card-content>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>

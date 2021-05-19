@@ -1,0 +1,14 @@
+<ion-list>
+    <ion-list-header>
+        <ion-label>
+            Opciones
+        </ion-label>
+    </ion-list-header>
+
+    <ion-item (click)="clickedOption(option)" class="capitalize t-white" button *ngFor="let option of popOptions">
+        <ion-icon slot="end" [name]="option.icon" color="primary"></ion-icon>
+        <ion-label>
+            <h3>{{ option.title }}</h3>
+        </ion-label>
+    </ion-item>
+</ion-list>

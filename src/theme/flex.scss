@@ -1,0 +1,30 @@
+.f{display: flex !important;}
+
+.f-column{display: flex !important; flex-direction: column !important;}
+.f-column-reverse{display: flex !important; flex-direction: column-reverse !important;}
+
+.f-row{flex-direction: row !important;}
+.f-row-reverse{flex-direction: row-reverse !important;}
+
+.f-nowrap{flex-wrap: nowrap !important;}
+.f-wrap{flex-wrap: wrap !important;}
+.f-wrap-reverse{flex-wrap: wrap-reverse !important;}
+
+.j-center{justify-content: center !important;}
+.j-start{justify-content: flex-start !important;}
+.j-end{justify-content: flex-end !important;}
+.j-between{justify-content: space-between !important;}
+.j-around{justify-content: space-around !important;}
+.j-evenly{justify-content: space-evenly !important;}
+
+.a-center{align-items: center !important;}
+.a-start{align-items: flex-start !important;}
+.a-end{align-items: flex-end !important;}
+.a-between{align-items: space-between !important;}
+.a-around{align-items: space-around !important;}
+.a-evenly{align-items: space-evenly !important;}
+
+.f-grow{flex-grow: 1 !important;}
+.f-flow{flex-flow: wrap !important;}
+.f-shrink{flex-shrink: 1 !important;}
+.f-basis-content{flex-basis: content !important;}

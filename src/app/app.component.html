@@ -1,26 +1,46 @@
 <ion-app>
-  <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
+  <ion-split-pane when="xl" contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay" menuId="principal">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi@ionicframework.com</ion-note>
+          <ion-list-header>Menu</ion-list-header>
+          <ion-note>www.korsario.com</ion-note>
 
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" routerLinkActive="selected" routerLink="/auth/profile" button class="capitalize" *ngIf="isAuth && user">
+              <ion-thumbnail slot="start">
+                <img [src]="avatar">
+              </ion-thumbnail>
+              <ion-label>
+                <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+                <p class="lowercase t-primary">{{ user.email }}</p>
+              </ion-label>
             </ion-item>
           </ion-menu-toggle>
-        </ion-list>
 
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
+          <ion-menu-toggle auto-hide="false" *ngFor="let page of appAuthPages; let i = index">
+            <ion-item *ngIf="page.visible" routerDirection="root" [routerLink]="[page.url]" lines="none" detail="false"
+              routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ page.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
 
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ label }}</ion-label>
-          </ion-item>
+          <ion-menu-toggle auto-hide="false" *ngFor="let page of appPublicPages; let i = index">
+            <ion-item *ngIf="page.visible" routerDirection="root" [routerLink]="[page.url]" lines="none" detail="false"
+              routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ page.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false">
+            <ion-item *ngIf="isAuth" routerDirection="root" (click)="logOut()" lines="none" detail="false">
+              <ion-icon slot="start" ios="log-out-outline" md="log-out-sharp"></ion-icon>
+              <ion-label>Salir</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          
         </ion-list>
       </ion-content>
     </ion-menu>

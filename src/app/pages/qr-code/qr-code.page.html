@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mi Codigo Qr</ion-title>
+
+    <ion-buttons *ngIf="!openFromModal" slot="start">
+      <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons *ngIf="openFromModal" slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="user" class="w-100 h-100 f j-center a-center">
+    <qr-code [value]="user.userId" size="300" errorCorrectionLevel="H"></qr-code>
+  </div>
+
+</ion-content>

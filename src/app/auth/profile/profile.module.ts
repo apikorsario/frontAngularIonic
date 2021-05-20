@@ -7,6 +7,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 import { ProfilePage } from './profile.page';
 import { UserOptionComponent } from 'src/app/shared/popovers/user-option/user-option.component';
 import { ChangePasswordComponent } from 'src/app/shared/modals/change-password/change-password.component';
+import { AppIonModule } from 'src/app/shared/components/app-ion.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { ChangePasswordComponent } from 'src/app/shared/modals/change-password/c
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
+    AppIonModule,
     ProfilePageRoutingModule,
     QrCodeModule
   ],

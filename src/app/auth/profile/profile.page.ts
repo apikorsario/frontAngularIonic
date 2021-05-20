@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GravatarService } from '@infinitycube/gravatar';
 import { LoadingController, ModalController, NavController, PopoverController } from '@ionic/angular';
 import { IPopOption } from 'src/app/shared/interfaces/pop-option';
 import { IUserRes } from 'src/app/shared/interfaces/responses/user-res';
@@ -19,7 +18,6 @@ import { QrCodePage } from '../qr-code/qr-code.page';
 })
 export class ProfilePage implements OnInit {
   public user: IUserRes;
-  public avatar: string;
   public locker: ILockerRes;
   public invoices: Array<IInvoiceRes>;
   public popOptions: Array<IPopOption>;
@@ -33,7 +31,6 @@ export class ProfilePage implements OnInit {
     private _invoiceService: InvoiceService,
     private _navCtrl: NavController,
     private _loadingCtrl: LoadingController,
-    private _gravatarService: GravatarService,
     private _popoverCtrl: PopoverController,
     private _modalCtrl: ModalController,
   ) { }
@@ -56,7 +53,6 @@ export class ProfilePage implements OnInit {
     this.userSubs = this._userService.getProfile().subscribe(
       res => {
         this.user = res.data;
-        this.avatar = this._gravatarService.url(this.user.email, 100, 'wavatar');
         this.loadOptions();
         this._loadingCtrl.dismiss();
       },
@@ -90,7 +86,6 @@ export class ProfilePage implements OnInit {
     this.userSubs = this._userService.getProfile().subscribe(
       res => {
         this.user = res.data;
-        this.avatar = this._gravatarService.url(this.user.email, 100, 'wavatar');
         event?.detail.complete();
       },
       err => event?.detail.complete()

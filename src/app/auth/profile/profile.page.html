@@ -21,23 +21,11 @@
   </ion-refresher>
 
   <div class="w-100 f j-center a-center f-wrap">
-    <ion-card class="f-grow" *ngIf="user">
-      <div class="f a-center">
-        <div class="w-120px h-120px">
-          <img class="w-100 h-100" [src]="avatar">
-        </div>
-        <ion-card-header>
-          <ion-card-title class="capitalize">{{ user.firstName }} {{ user.lastName }}</ion-card-title>
-          <ion-card-subtitle class="lowercase">{{ user.email }}</ion-card-subtitle>
-          <ion-card-subtitle class="capitalize">
-            Fecha de Registro: {{ user.createdDate | date: 'd, MMM, y, h:mm' : 'Z' }}
-          </ion-card-subtitle>
-        </ion-card-header>
-      </div>
-    </ion-card>
+    <ion-user class="f-grow" *ngIf="user" [user]="user"></ion-user>
+
    
     <ion-card class="f-grow" *ngIf="locker">
-      <ion-card-header>
+      <ion-card-header class="pb-0">
         <ion-card-title class="capitalize">Casillero</ion-card-title>
       </ion-card-header>
 
@@ -55,7 +43,7 @@
     </ion-card>
    
     <ion-card class="f-grow" *ngIf="invoices">
-      <ion-card-header>
+      <ion-card-header class="pb-0">
         <ion-card-title class="capitalize">Facturas</ion-card-title>
       </ion-card-header>
 

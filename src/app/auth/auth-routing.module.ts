@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeGuard } from '../shared/guards/employee.guard';
+import { OwnerGuard } from '../shared/guards/owner.guard';
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
     path: 'admin',
     canActivate: [EmployeeGuard],
     loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule)
+  },
+  {
+    path: 'owner',
+    canActivate: [OwnerGuard],
+    loadChildren: () => import('../owner/owner.module').then(m => m.OwnerModule)
   },
 ];
 

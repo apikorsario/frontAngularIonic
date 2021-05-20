@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   public appPublicPages: Array<IMenuPage>;
   public appCustomerPages: Array<IMenuPage>;
   public appEmployeePages: Array<IMenuPage>;
+  public appOwnerPages: Array<IMenuPage>;
   public user: IUserRes;
   public avatar: string;
   public darkTheme: boolean;
@@ -46,6 +47,7 @@ export class AppComponent implements OnInit {
     this.fillSignPages();
     this.fillCustomerPages();
     this.fillEmployeePages();
+    this.fillOwnerPages();
   }
 
   async loadUser() {
@@ -102,6 +104,15 @@ export class AppComponent implements OnInit {
     if (await this._authService.haveRole('Employee')) {
       this.appEmployeePages = [
         { title: 'Ruta Empleado', url: '/auth/admin', icon: 'key' }
+      ];
+    }
+  }
+
+  async fillOwnerPages() {
+    this.appOwnerPages = [];
+    if (await this._authService.haveRole('Owner')) {
+      this.appOwnerPages = [
+        { title: 'Asignar Roles', url: '/auth/owner/assign-roles', icon: 'id-card' }
       ];
     }
   }

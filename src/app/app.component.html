@@ -4,7 +4,7 @@
       <ion-header>
         <ion-toolbar>
           <ion-title>Menu</ion-title>
-          <ion-title size="small">www.korsario.com</ion-title>
+          <ion-title class="t-ellipsis" size="small">www.korsario.com</ion-title>
 
           <ion-buttons slot="end">
             <ion-button (click)="clickedChangeTheme(false)">
@@ -46,6 +46,13 @@
           </ion-menu-toggle>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let page of appCustomerPages; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[page.url]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ page.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false" *ngFor="let page of appOwnerPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[page.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon slot="start" [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
               <ion-label>{{ page.title }}</ion-label>

@@ -47,7 +47,7 @@ export class SignUpPage implements OnInit {
       password: new FormControl(null, [
         Validators.required,
         Validators.maxLength(50),
-        Validators.minLength(5),
+        Validators.minLength(6),
       ]),
     })
   }

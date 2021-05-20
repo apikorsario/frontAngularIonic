@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Usuario</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <div class="f a-center">
+      <div class="w-100px h-100px">
+        <img class="w-100 h-100" [src]="user.avatar">
+      </div>
+      <ion-card-header>
+        <ion-card-title class="capitalize">{{ user.firstName }} {{ user.lastName }}</ion-card-title>
+        <ion-card-subtitle class="lowercase">{{ user.email }}</ion-card-subtitle>
+        <ion-card-subtitle class="capitalize">
+          Registro: {{ user.createdDate | date: 'd, MMM, y, h:mm' : 'Z' }}
+        </ion-card-subtitle>
+      </ion-card-header>
+    </div>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="light">
+      <ion-card-title>Restablecer Contraceña</ion-card-title>
+    </ion-card-header>
+    <ion-item [formGroup]="formForgotPassword">
+      <ion-input type="password" formControlName="newPassword" placeholder="Nueva Contraceña:"></ion-input>
+      <ion-button *ngIf="!user.updating; else btnSpinner" (click)="forgotPassword()" fill="clear">
+        Aceptar
+      </ion-button>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="light">
+      <ion-card-title>Asignar Roles</ion-card-title>
+    </ion-card-header>
+    <ion-item [disabled]="user.addingEmployee" button (click)="addRole('Employee')">
+      <ion-label>Empleado</ion-label>
+      <ion-icon *ngIf="!user.addingEmployee; else spinner" slot="end" name="man"></ion-icon>
+    </ion-item>
+    <ion-item [disabled]="user.addingOwner" button (click)="addRole('Owner')">
+      <ion-label>Propietario</ion-label>
+      <ion-icon *ngIf="!user.addingOwner; else spinner" slot="end" name="key"></ion-icon>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="light">
+      <ion-card-title>Eliminar Roles</ion-card-title>
+    </ion-card-header>
+    <ion-item [disabled]="user.deletingEmployee" button (click)="removeRole('Employee')">
+      <ion-label>Empleado</ion-label>
+      <ion-icon *ngIf="!user.deletingEmployee; else spinner" slot="end" name="man"></ion-icon>
+    </ion-item>
+    <ion-item [disabled]="user.deletingOwner" button (click)="removeRole('Owner')">
+      <ion-label>Propietario</ion-label>
+      <ion-icon *ngIf="!user.deletingOwner; else spinner" slot="end" name="key"></ion-icon>
+    </ion-item>
+  </ion-card>
+
+</ion-content>
+
+<ng-template #spinner>
+  <ion-spinner></ion-spinner>
+</ng-template>
+
+<ng-template #btnSpinner>
+  <ion-button fill="clear">
+    Procesando...
+    <ion-spinner></ion-spinner>
+  </ion-button>
+</ng-template>

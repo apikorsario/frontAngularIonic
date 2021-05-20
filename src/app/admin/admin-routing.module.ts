@@ -5,7 +5,6 @@ import { EmployeeGuard } from '../shared/guards/employee.guard';
 const routes: Routes = [
   {
     path: 'product-create',
-    canActivate: [EmployeeGuard],
     loadChildren: () => import('./product-create/product-create.module').then( m => m.ProductCreatePageModule )
   }
 ];

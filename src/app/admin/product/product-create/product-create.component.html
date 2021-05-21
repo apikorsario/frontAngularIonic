@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Nuevo Producto</ion-title>
+
+        <ion-buttons slot="start">
+            <ion-back-button text=""></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ng-container [formGroup]="formProduct">
+
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>Imagenes</ion-card-title>
+            </ion-card-header>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>Datos</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+                <ion-item>
+                    <ion-label position="floating">Nombre</ion-label>
+                    <ion-input formControlName="productName"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Descripción</ion-label>
+                    <ion-input formControlName="description"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Precio</ion-label>
+                    <ion-input type="number" formControlName="unitPrice"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Existencia</ion-label>
+                    <ion-input type="number" formControlName="stock"></ion-input>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
+    
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>Categorias</ion-card-title>
+            </ion-card-header>
+        </ion-card>
+
+    </ng-container>
+</ion-content>

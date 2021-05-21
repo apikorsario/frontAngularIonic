@@ -103,7 +103,8 @@ export class AppComponent implements OnInit {
     this.appEmployeePages = [];
     if (await this._authService.haveRole('Employee')) {
       this.appEmployeePages = [
-        { title: 'Ruta Empleado', url: '/auth/admin', icon: 'key' }
+        { title: 'Productos', url: '/auth/admin/products', icon: 'grid' },
+        { title: 'Categorias', url: '/auth/admin/categories', icon: 'list' },
       ];
     }
   }

@@ -21,4 +21,13 @@ export class CategoryService extends BaseService {
             map(r => r as IResponse<Array<ICategoryRes>>)
         );
     }
+
+    /**
+     * getCategoryById
+     */
+    public getCategoryById(categoryId: string) {
+        return this.http.get(`${this.pathUrl}${categoryId}`).pipe(
+            map(r => r as IResponse<ICategoryRes>)
+        );
+    }
 }

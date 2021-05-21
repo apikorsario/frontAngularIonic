@@ -1,11 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EmployeeGuard } from '../shared/guards/employee.guard';
 
 const routes: Routes = [
   {
-    path: 'product-create',
-    loadChildren: () => import('./product-create/product-create.module').then( m => m.ProductCreatePageModule )
+    path: '',
+    redirectTo: 'products',
+    pathMatch: 'full'
+  },
+  {
+    path : 'products',
+    loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
+  },
+  {
+    path: 'categories',
+    loadChildren: () => import('./category/category.module').then(m => m.CategoryModule)
   }
 ];
 

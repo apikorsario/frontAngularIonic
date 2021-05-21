@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Nueva Categoria</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/auth/admin/categories/list"></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button [disabled]="creating" (click)="clickedCreateCategory()">
+        <ion-icon name="save" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card [formGroup]="formCategory">
+    <ion-card-header>
+      <ion-card-title>Categoria</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input formControlName="categoryName"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Productos</ion-card-title>
+    </ion-card-header>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let product of products">
+          <ion-card>
+            <ion-item button (click)="clickedProduct(product);">
+              <ion-label class="capitalize">{{ product.productName }}</ion-label>
+              <ion-checkbox mode="ios" slot="end" [(ngModel)]="product.checked"></ion-checkbox>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <div class="f j-center">
+    <ion-button [disabled]="creating" (click)="clickedCreateCategory()">
+      Aceptar
+    </ion-button>
+  </div>
+
+</ion-content>

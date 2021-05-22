@@ -39,7 +39,7 @@
       <ion-row>
         <ion-col *ngFor="let product of products">
           <ion-card>
-            <ion-item button (click)="clickedProduct(product);">
+            <ion-item button (click)="clickedProduct(product)">
               <ion-label class="capitalize">{{ product.productName }}</ion-label>
               <ion-checkbox mode="ios" slot="end" [(ngModel)]="product.checked"></ion-checkbox>
             </ion-item>

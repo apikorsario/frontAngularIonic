@@ -5,51 +5,123 @@
         <ion-buttons slot="start">
             <ion-back-button text=""></ion-back-button>
         </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button [disabled]="saving" (click)="clickedSaveProduct()">
+                <ion-icon name="save" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ng-container [formGroup]="formProduct">
 
-        <ion-card>
-            <ion-card-header>
-                <ion-card-title>Imagenes</ion-card-title>
-            </ion-card-header>
-        </ion-card>
+    <ion-grid class="p-0">
+        <ion-row>
+            <ion-col class="p-0" offsetLg="2" sizeLg="8" offsetMd="1" sizeMd="10">
+                <ion-card>
+                    <ion-card-header *ngIf="images?.limit" class="f j-between a-center">
+                        <ion-card-title>
+                            Imagenes
+                        </ion-card-title>
+                    </ion-card-header>
+                    <div *ngIf="images.length" class="f j-around f-wrap">
+                        <div (click)="clickedRemoveImage(img)" class="p-8 m-8 w-120px h-120px f j-center a-center bg-white"
+                            *ngFor="let img of images.value; index as i">
+                            <!-- <div *ngIf="imageIsValid(img); else emptyImg">
+                            </div> -->
+                            <ion-img [src]="img.imageUrl" [alt]="img.imageName"></ion-img>
+                        </div>
+                    </div>
+                </ion-card>
+                
+                <ion-card *ngIf="!images?.limit">
+                    <ion-card-header class="f j-between a-center">
+                        <ion-card-title>
+                            Imagenes
+                        </ion-card-title>
+                        <div>
+                            <ion-buttons slot="end">
+                                <ion-button *ngIf="limitImgs > images.length" color="primary" (click)="clickedAddImage()">
+                                    <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+                                </ion-button>
+                                <ion-button color="primary" *ngIf="images.length" (click)="clickedAlreadyImages()">
+                                    <ion-icon name="checkmark-outline" slot="icon-only"></ion-icon>
+                                </ion-button>
+                            </ion-buttons>
+                        </div>
+                    </ion-card-header>
+        
+                    <ion-card-content *ngIf="images.length" formArrayName="images">
+                        <div [formGroupName]="i" *ngFor="let img of images.controls; index as i">
+                            <div *ngIf="i == (images.length - 1)">
+                                <ion-item>
+                                    <ion-label position="floating">Nombre</ion-label>
+                                    <ion-input maxlength="20" formControlName="imageName"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">Url</ion-label>
+                                    <ion-input formControlName="imageUrl"></ion-input>
+                                </ion-item>
+                            </div>
+                        </div>
+                    </ion-card-content>
+                </ion-card>
+        
+                <ion-card [formGroup]="formProduct">
+                    <ion-card-header>
+                        <ion-card-title>Datos</ion-card-title>
+                    </ion-card-header>
+        
+                    <ion-card-content>
+                        <ion-item>
+                            <ion-label position="floating">Nombre</ion-label>
+                            <ion-input formControlName="productName"></ion-input>
+                        </ion-item>
+        
+                        <ion-item>
+                            <ion-label position="floating">Descripción</ion-label>
+                            <ion-input formControlName="description"></ion-input>
+                        </ion-item>
+        
+                        <ion-item>
+                            <ion-label position="floating">Precio</ion-label>
+                            <ion-input type="number" formControlName="unitPrice"></ion-input>
+                        </ion-item>
+        
+                        <ion-item>
+                            <ion-label position="floating">Existencia</ion-label>
+                            <ion-input type="number" formControlName="stock"></ion-input>
+                        </ion-item>
+                    </ion-card-content>
+                </ion-card>
 
-        <ion-card>
-            <ion-card-header>
-                <ion-card-title>Datos</ion-card-title>
-            </ion-card-header>
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>Categorias</ion-card-title>
+                    </ion-card-header>
+            
+                    <ion-card-content class="f j-between f-wrap">
+                        <ion-chip [color]="category?.checked ? 'primary' : null" *ngFor="let category of categories" (click)="clickedCategory(category)">
+                            <ion-label class="capitalize">{{ category.categoryName }}</ion-label>
+                            <ion-icon *ngIf="category?.checked" color="primary" name="radio-button-on"></ion-icon>
+                            <ion-icon *ngIf="!category?.checked" name="radio-button-off"></ion-icon>
+                        </ion-chip>
+                    </ion-card-content> 
+                </ion-card>
 
-            <ion-card-content>
-                <ion-item>
-                    <ion-label position="floating">Nombre</ion-label>
-                    <ion-input formControlName="productName"></ion-input>
-                </ion-item>
+                <div class="p-10 f j-end">
+                    <ion-button [disabled]="saving" (click)="clickedSaveProduct()">
+                        Aceptar
+                    </ion-button>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
-                <ion-item>
-                    <ion-label position="floating">Descripción</ion-label>
-                    <ion-input formControlName="description"></ion-input>
-                </ion-item>
 
-                <ion-item>
-                    <ion-label position="floating">Precio</ion-label>
-                    <ion-input type="number" formControlName="unitPrice"></ion-input>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label position="floating">Existencia</ion-label>
-                    <ion-input type="number" formControlName="stock"></ion-input>
-                </ion-item>
-            </ion-card-content>
-        </ion-card>
-    
-        <ion-card>
-            <ion-card-header>
-                <ion-card-title>Categorias</ion-card-title>
-            </ion-card-header>
-        </ion-card>
-
-    </ng-container>
 </ion-content>
+
+
+<ng-template #emptyImg>
+    <ion-icon class="z-4" name="alert-circle-outline"></ion-icon>
+</ng-template>

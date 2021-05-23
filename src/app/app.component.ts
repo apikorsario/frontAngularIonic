@@ -105,6 +105,7 @@ export class AppComponent implements OnInit {
       this.appEmployeePages = [
         { title: 'Productos', url: '/auth/admin/products', icon: 'grid' },
         { title: 'Categorias', url: '/auth/admin/categories', icon: 'list' },
+        { title: 'Facturas', url: '/auth/admin/invoices', icon: 'reader' },
       ];
     }
   }

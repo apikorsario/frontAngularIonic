@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'categories',
     loadChildren: () => import('./category/category.module').then(m => m.CategoryModule)
+  },
+  {
+    path: 'invoices',
+    loadChildren: () => import('./invoice/invoice.module').then(m => m.InvoiceModule)
   }
 ];
 

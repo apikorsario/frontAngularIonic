@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Busqueda de Usuario</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="search" placeholder="Buscar" searchIcon="search" ngDefaultControl></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Usuarios</ion-card-title>
+    </ion-card-header>
+
+    <ion-user (click)="closeModal(user)" [user]="user" *ngFor="let user of users | filterUser: search "></ion-user>
+    
+  </ion-card>
+
+</ion-content>

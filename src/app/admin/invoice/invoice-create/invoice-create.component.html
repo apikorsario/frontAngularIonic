@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Generar Factura</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/auth/admin/invoice" text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-chip (click)="clickedSave()">
+        <ion-label>Guardar</ion-label>
+        <ion-icon color="primary" name="save"></ion-icon>
+      </ion-chip>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-card [formGroup]="formInvoice">
+    <ion-card-header class="f j-between a-center">
+      <ion-card-title>Usuario</ion-card-title>
+
+      <ion-chip color="primary" (click)="clickedSearchUser()">
+        <ion-label>Buscar</ion-label>
+        <ion-icon name="qr-code"></ion-icon>
+      </ion-chip>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Id del Usuario</ion-label>
+        <ion-input formControlName="customerId"></ion-input>
+      </ion-item>
+    </ion-card-content>
+ </ion-card>
+  
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Metodos de Pago</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item [color]="payment?.checked ? 'light' : null" (click)="addPayment(payment)" button *ngFor="let payment of payments">
+        <ion-label>{{ payment.methodName }}</ion-label>
+        <ion-checkbox mode="ios" slot="end" [checked]="payment?.checked"></ion-checkbox>
+      </ion-item>
+    </ion-card-content>
+ </ion-card>
+
+
+
+</ion-content>

@@ -92,7 +92,7 @@ export class LockerPage implements OnInit {
       () => {
         this.doRefresh();
         this.finishAction(detail, 'adding');
-        ToastModel.showSuccess(`se ${quantity == detail.quantity ? 'eliminó' : 'removio 1'}  de tu casillero`)
+        ToastModel.showSuccess(`se agrego 1 ${detail.product.productName} a tu casillero`)
       },
       err => {
         this.finishAction(detail, 'adding');

@@ -17,44 +17,45 @@
   </ion-refresher>
 
 
-  <div class="w-100 f j-center f-wrap">
-    <ion-card class="w-360px m-10" button
-      *ngFor="let product of products | productsByCategory: filterCategory | sortBy: filterSort">
+  <ion-grid class="p-0"><ion-row>
+    <ion-col class="p-0" sizeXl="4" sizeMd="6" *ngFor="let product of products | productsByCategory: filterCategory | sortBy: filterSort">
 
-      <ion-product-grid [product]="product"></ion-product-grid>
-
-
-      <ion-card-content *ngIf="!getQuantityInLocker(product)" class="pt-0 f j-center a-center">
-        <ion-button *ngIf="!product.adding" fill="clear" (click)="clickedAddDetailToLocker(product)">
-          Agregar al Casillero
-          <ion-icon slot="end" name="file-tray-full-outline"></ion-icon>
-        </ion-button>
-
-        <ion-button *ngIf="product.adding" fill="clear">
-          Procesando... <ion-spinner></ion-spinner>
-        </ion-button>
-      </ion-card-content>
-
-
-      <ion-card-content *ngIf="locker && getQuantityInLocker(product)" class="pt-0 f j-center a-center">
-        <ion-buttons class="w-80 f j-between a-center">
-          <ion-button *ngIf="!product.removing; else btnSpinner" color="primary"
-            (click)="clickedRemoveDetailToLocker(product)">
-            <ion-icon name="remove-circle" slot="icon-only"></ion-icon>
+      <ion-card>
+        <ion-product-grid [product]="product"></ion-product-grid>
+    
+        <ion-card-content *ngIf="!getQuantityInLocker(product)" class="pt-0 f j-center a-center">
+          <ion-button *ngIf="!product.adding" fill="clear" (click)="clickedAddDetailToLocker(product)">
+            Agregar al Casillero
+            <ion-icon slot="end" name="file-tray-full-outline"></ion-icon>
           </ion-button>
-
-          <ion-button color="primary" class="b w-80">
-            <h2>{{getQuantityInLocker(product)}}</h2>
+    
+          <ion-button *ngIf="product.adding" fill="clear">
+            Procesando... <ion-spinner></ion-spinner>
           </ion-button>
-
-          <ion-button *ngIf="!product.adding; else btnSpinner" color="primary"
-            (click)="clickedAddDetailToLocker(product)">
-            <ion-icon name="add-circle" slot="icon-only"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-card-content>
-    </ion-card>
-  </div>
+        </ion-card-content>
+    
+    
+        <ion-card-content *ngIf="locker && getQuantityInLocker(product)" class="pt-0 f j-center a-center">
+          <ion-buttons class="w-80 f j-center a-center">
+            <ion-button *ngIf="!product.removing; else btnSpinner" color="primary"
+              (click)="clickedRemoveDetailToLocker(product)">
+              <ion-icon name="remove-circle" slot="icon-only"></ion-icon>
+            </ion-button>
+    
+            <ion-button color="primary" class="b w-50">
+              <h2>{{getQuantityInLocker(product)}}</h2>
+            </ion-button>
+    
+            <ion-button *ngIf="!product.adding; else btnSpinner" color="primary"
+              (click)="clickedAddDetailToLocker(product)">
+              <ion-icon name="add-circle" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
 
 </ion-content>
 

@@ -93,8 +93,8 @@ export class AppComponent implements OnInit {
     if (await this._authService.haveRole('Customer')) {
       this.appCustomerPages = [
         { title: 'Mi Codigo Qr', url: '/auth/qr-code', icon: 'qr-code' },
-        { title: 'Casillero', url: '/auth/locker', icon: 'file-tray-full' },
-        { title: 'Facturas', url: '/auth/invoices', icon: 'create' },
+        { title: 'Mi Casillero', url: '/auth/locker', icon: 'file-tray-full' },
+        { title: 'Mis Compras', url: '/auth/invoices', icon: 'basket' },
       ];
     }
   }

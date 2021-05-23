@@ -1,4 +1,4 @@
-<ion-slides pager="true" [options]="slideOpts">
+<ion-slides [pager]="product.images.length > 1" [options]="slideOpts">
   <ion-slide class="bg-white" *ngFor="let img of product.images">
     <div class="h-320px p-30">
       <ion-img class="h-100" [src]="img.imageUrl" [alt]="img.imageName"></ion-img>

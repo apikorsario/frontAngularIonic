@@ -9,12 +9,14 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
 import { PopoverModule } from '../shared/popovers/popover.module';
 import { PipeModule } from '../shared/pipes/pipe.module';
+import { AppIonModule } from '../shared/components/app-ion.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    AppIonModule,
     HomePageRoutingModule,
     PopoverModule,
     PipeModule,

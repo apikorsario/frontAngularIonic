@@ -1,0 +1,29 @@
+<ion-slides pager="true" [options]="slideOpts">
+  <ion-slide class="bg-white" *ngFor="let img of product.images">
+    <div class="h-320px p-30">
+      <ion-img class="h-100" [src]="img.imageUrl" [alt]="img.imageName"></ion-img>
+    </div>
+  </ion-slide>
+</ion-slides>
+
+<ion-card-header>
+  <ion-card-title class="capitalize t-ellipsis">
+    {{ product.productName }}
+  </ion-card-title>
+  <ion-card-subtitle color="danger" class="capitalize t-ellipsis">
+    Precio: {{ product.unitPrice | currency }}
+  </ion-card-subtitle>
+  <ion-card-subtitle class="capitalize t-ellipsis" *ngIf="date">
+    Existencia: {{ product.stock }} Unidades
+  </ion-card-subtitle>
+  <ion-card-subtitle class="capitalize t-ellipsis" *ngIf="date">
+    Fecha de Creación: {{ product.createdDate | date: 'd, MMM, y' : 'Z' }}
+  </ion-card-subtitle>
+</ion-card-header>
+
+<ion-card-content>
+  <ion-card-subtitle>Descripcion:</ion-card-subtitle>
+  <ion-textarea readonly
+    [value]="product.description">
+  </ion-textarea>
+</ion-card-content>

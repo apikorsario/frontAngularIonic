@@ -21,11 +21,10 @@
 
 <ion-content>
 
-
   <ion-grid class="p-0"><ion-row>
     <ion-col offsetLg="2" sizeLg="8" class="p-0">
       <ion-card *ngIf="!edit && product">
-        <ion-product [product]="product"></ion-product>
+        <ion-product-grid [date]="true" [product]="product"></ion-product-grid>
       </ion-card>
     </ion-col>
   </ion-row></ion-grid>

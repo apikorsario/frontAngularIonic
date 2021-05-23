@@ -21,27 +21,7 @@
     <ion-card class="w-360px m-10" button
       *ngFor="let product of products | productsByCategory: filterCategory | sortBy: filterSort">
 
-      <ion-slides class="mb-10">
-        <ion-slide class="bg-white" *ngFor="let image of product.images">
-          <div class="f j-center a-center h-360px">
-            <img [src]="image.imageUrl" [alt]="imageName">
-          </div>
-        </ion-slide>
-      </ion-slides>
-
-      <ion-card-header class="pb-0">
-        <ion-card-title class="capitalize t-ellipsis">
-          {{ product.productName }}
-        </ion-card-title>
-        <ion-card-subtitle color="danger">
-          Precio: {{ product.unitPrice | currency }}
-        </ion-card-subtitle>
-      </ion-card-header>
-
-
-      <ion-card-content>
-        <ion-textarea class="capitalize" rows="3" readonly [value]="product.description"></ion-textarea>
-      </ion-card-content>
+      <ion-product-grid [product]="product"></ion-product-grid>
 
 
       <ion-card-content *ngIf="!getQuantityInLocker(product)" class="pt-0 f j-center a-center">

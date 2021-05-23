@@ -1,0 +1,105 @@
+<ion-grid class="p-0">
+  <ion-row>
+
+    <ion-col class="p-0" offsetXl="2" sizeXl="4" sizeSm="6" offsetXs="0" sizeXs="12">
+      <ion-card [formGroup]="formProduct">
+        <ion-card-header>
+          <ion-card-title>Datos</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+
+          <ion-item>
+            <ion-label position="stacked">Nombre</ion-label>
+            <ion-input formControlName="productName"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Descripción</ion-label>
+            <ion-textarea rows="3" formControlName="description"></ion-textarea>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Precio</ion-label>
+            <ion-input formControlName="unitPrice"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Existencia</ion-label>
+            <ion-input formControlName="stock"></ion-input>
+          </ion-item>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+
+    <ion-col class="p-0" sizeSm="6" sizeXl="4">
+      <ion-grid class="p-0">
+        <ion-row>
+          <ion-col class="p-0" size="6" *ngFor="let image of images.value">
+            <ion-card class="h-180px" (click)="clickedRemoveImage(image)">
+              <div class="w-100 h-100 f j-center a-center bg-white">
+                <ion-img [src]="image.imageUrl" [alt]="image.imageName"></ion-img>
+              </div>
+            </ion-card>
+          </ion-col>
+
+          <ion-col *ngIf="imagesAllowed > images.length" class="p-0" size="6">
+            <ion-card class="h-180px" (click)="showImage = true">
+              <div class="w-100 h-100 f f-column j-center a-center bg-white">
+                <ion-icon name="image" class="z-6"></ion-icon>
+                Nueva Imagen
+              </div>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+
+    <ion-col *ngIf="showImage" class="p-0" offsetXl="2" sizeXl="8" offsetXs="0" sizeXs="12">
+      <ion-card [formGroup]="formImage">
+        <ion-card-header class="f j-between a-center">
+          <ion-card-title>Imagen</ion-card-title>
+
+          <ion-chip (click)="clickedAddImage()" color="primary">
+            <ion-label>Agregar</ion-label>
+            <ion-icon name="images"></ion-icon>
+          </ion-chip>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input formControlName="imageName"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Url</ion-label>
+            <ion-input formControlName="imageUrl"></ion-input>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col class="p-0" offsetXl="2" sizeXl="8" offsetXs="0" sizeXs="12">
+      <ion-card>
+        <ion-card-header class="f j-between">
+          <ion-card-title>Categorias</ion-card-title>
+
+          <ion-spinner *ngIf="!categories"></ion-spinner>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-chip (click)="clickedCategory(category)" *ngFor="let category of categories">
+            <ion-label>{{ category.categoryName }}</ion-label>
+            <ion-icon *ngIf="!category?.checked" name="radio-button-off"></ion-icon>
+            <ion-icon *ngIf="category?.checked" color="primary" name="radio-button-on"></ion-icon>
+          </ion-chip>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+
+  </ion-row>
+</ion-grid>

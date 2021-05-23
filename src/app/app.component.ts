@@ -34,11 +34,11 @@ export class AppComponent implements OnInit {
     this.clickedChangeTheme(true);
   }
 
-  async clickedChangeTheme(loadStorage: boolean) {
+  async clickedChangeTheme(loadStorage?: boolean) {
     let key = 'themeStyle';
     this.darkTheme = loadStorage ? await this._storageService.get({ key }) : !this.darkTheme;
     document.body.setAttribute(key, this.darkTheme ? 'dark' : 'light');
-    if (event) this._storageService.set({ key, value: this.darkTheme });
+    if (!loadStorage) this._storageService.set({ key, value: this.darkTheme });
   }
 
   ngOnInit(): void {

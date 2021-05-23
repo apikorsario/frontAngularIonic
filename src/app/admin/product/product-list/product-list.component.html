@@ -11,5 +11,19 @@
 </ion-header>
 
 <ion-content>
-  list products todo
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid class="p-0">
+    <ion-row>
+      <ion-col offsetLg="2" sizeLg="8" class="p-0">
+        <ion-card routerDirection="root" [routerLink]="['/auth/admin/products/edit',product.productId]" button *ngFor="let product of products">
+          <ion-product [product]="product"></ion-product>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

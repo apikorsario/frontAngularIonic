@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { IonicModule } from "@ionic/angular";
 import { IonCategoryComponent } from "./ion-category/ion-category.component";
+import { IonProductComponent } from "./ion-product/ion-product.component";
 import { IonUserComponent } from "./ion-user/ion-user.component";
 
 @NgModule({
@@ -11,11 +12,13 @@ import { IonUserComponent } from "./ion-user/ion-user.component";
     ],
     exports: [
         IonUserComponent,
-        IonCategoryComponent
+        IonCategoryComponent,
+        IonProductComponent
     ],
     declarations: [
         IonUserComponent,
-        IonCategoryComponent
+        IonCategoryComponent,
+        IonProductComponent
     ]
 })
 export class AppIonModule { }

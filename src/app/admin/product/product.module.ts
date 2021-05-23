@@ -8,13 +8,15 @@ import { AppIonModule } from 'src/app/shared/components/app-ion.module';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProductFormComponent } from './product-form/product-form.component';
 
 
 @NgModule({
   declarations: [
     ProductListComponent,
     ProductCreateComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    ProductFormComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
     ReactiveFormsModule,
     IonicModule,
     AppIonModule,
-    ProductRoutingModule
+    ProductRoutingModule,
   ]
 })
 export class ProductModule { }

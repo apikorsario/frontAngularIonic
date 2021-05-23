@@ -22,4 +22,13 @@ export class ProductService extends BaseService {
       map(r => r as IResponse<Array<IProductRes>>)
     )
   }
+
+  /**
+   * getProductById
+   */
+  public getProductById(productId: string) {
+    return this.http.get(`${this.pathUrl}${productId}`).pipe(
+      map(r => r as IResponse<IProductRes>)
+    )
+  }
 }

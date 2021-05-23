@@ -1,3 +1,35 @@
-<p>
-  product-edit works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Producto</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/auth/admin/products"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-chip *ngIf="!edit" (click)="edit = !edit">
+        Editar
+        <ion-icon color="primary" name="pencil"></ion-icon>
+      </ion-chip>
+
+      <ion-chip *ngIf="edit" (click)="clickedSave()">
+        Guardar Cambios
+        <ion-icon color="primary" name="save"></ion-icon>
+      </ion-chip>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-grid class="p-0"><ion-row>
+    <ion-col offsetLg="2" sizeLg="8" class="p-0">
+      <ion-card *ngIf="!edit && product">
+        <ion-product [product]="product"></ion-product>
+      </ion-card>
+    </ion-col>
+  </ion-row></ion-grid>
+
+  <product-form *ngIf="edit && product" [product]="product" [$clickSave]="$clickSave"></product-form>
+
+</ion-content>

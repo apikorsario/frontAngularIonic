@@ -37,6 +37,19 @@ export class CategoryListComponent implements OnInit {
     )
   }
 
+  doRefresh(event: CustomEvent) {
+    this._categoryService.getCategories().subscribe(
+      res => {
+        this.categories = res.data;
+        event.detail.complete();
+      },
+      err => {
+        console.log(err);
+        event.detail.complete();
+      }
+    )
+  }
+
   async clickedCategory(category: ICategoryRes) {
     let modal = await this._modalCtrl.create({
       component: CategoryEditComponent,

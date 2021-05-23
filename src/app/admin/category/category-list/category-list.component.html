@@ -12,6 +12,10 @@
 
 <ion-content>
 
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-grid class="p-0">
     <ion-row>
       <ion-col class="p-0" sizeXl="4" sizeMd="6" sizeXs="12" *ngFor="let category of categories">

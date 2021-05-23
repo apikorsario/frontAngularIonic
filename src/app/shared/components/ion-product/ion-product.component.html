@@ -1,0 +1,28 @@
+<ion-grid class="p-0"><ion-row>
+  <ion-col class="p-0 mh-240px" sizeMd="3" offsetSm="0" sizeSm="4" offsetXs="3" sizeXs="6">
+    <ion-slides class="w-100 h-100 bg-white" [options]="slideOpts">
+      <ion-slide *ngFor="let img of product.images">
+        <div class="m-20 w-100 h-100 f j-center a-center bg-white">
+          <ion-img [src]="img.imageUrl" [alt]="img.imageName"></ion-img>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </ion-col>
+
+  <ion-col sizeMd="9" sizeSm="8" sizeXs="12">
+    <ion-card-header>
+      <ion-card-title class="capitalize">{{ product.productName }}</ion-card-title>
+      <ion-card-subtitle>Precio: {{ product.unitPrice | currency }}</ion-card-subtitle>
+      <ion-card-subtitle>Existencia: {{ product.stock }} Unidades</ion-card-subtitle>
+      <ion-card-subtitle>Fecha de Creación: {{ product.createdDate | date: 'd, MMM, y' : 'Z' }}</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <ion-card-subtitle>Descripcion:</ion-card-subtitle>
+      <ion-textarea readonly
+        [value]="product.description">
+      </ion-textarea>
+    </ion-card-content>
+  </ion-col>
+</ion-row></ion-grid>
+

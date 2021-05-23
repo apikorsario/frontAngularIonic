@@ -22,4 +22,13 @@ export class AdminProductService extends BaseService {
             map(r => r as IResponse<null>)
         )
     }
+
+    /**
+     * updateProduct
+     */
+    public updateProduct(productId: string, body: IProductReq) {
+        return this.http.put(`${this.pathUrl}${productId}`, body).pipe(
+            map(r => r as IResponse<null>)
+        )
+    }
 }

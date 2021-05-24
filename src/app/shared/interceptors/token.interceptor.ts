@@ -3,7 +3,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/c
 import { from, Observable } from "rxjs";
 import { Plugins } from "@capacitor/core";
 
-const { Storage } = Plugins;
+const { Storage, Network } = Plugins;
 
 @Injectable()
 

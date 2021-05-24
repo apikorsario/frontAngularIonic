@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { GravatarService } from '@infinitycube/gravatar';
 import { NavController } from '@ionic/angular';
-import { Subscription } from 'rxjs';
 import { IMenuPage } from './shared/interfaces/menu-page';
 import { IUserRes } from './shared/interfaces/responses/user-res';
 import { ToastModel } from './shared/models/toast.model';
 import { AuthService } from './shared/services/auth.service';
 import { StorageService } from './shared/services/storage.service';
 import { UserService } from './shared/services/user.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -106,6 +106,7 @@ export class AppComponent implements OnInit {
         { title: 'Productos', url: '/auth/admin/products', icon: 'grid' },
         { title: 'Categorias', url: '/auth/admin/categories', icon: 'list' },
         { title: 'Facturas', url: '/auth/admin/invoices', icon: 'reader' },
+        { title: 'Usuarios', url: '/auth/admin/users', icon: 'people' },
       ];
     }
   }

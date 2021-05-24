@@ -1,0 +1,17 @@
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="h-100 f j-center a-center">
+    <ion-grid><ion-row>
+      <ion-col sizeXs="12" offsetXs="0" sizeMd="6" offsetMd="3">
+        <div class="p-30">
+          <ion-img src="assets/logo.png"></ion-img>
+        </div>
+        <ion-text class="weight-600">Fallo La Conexion!</ion-text>
+      </ion-col>
+    </ion-row></ion-grid>
+  </div>
+</ion-content>

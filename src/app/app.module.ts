@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from "./shared/interceptors/token.interceptor";
 import { GravatarModule } from '@infinitycube/gravatar';
+import { NetworkInterceptor } from './shared/interceptors/network.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { GravatarModule } from '@infinitycube/gravatar';
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: NetworkInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
 })

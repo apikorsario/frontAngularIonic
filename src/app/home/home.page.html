@@ -8,6 +8,10 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar name="search" [(ngModel)]="search" placeholder="Buscar Producto" searchIcon="search"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -18,7 +22,8 @@
 
 
   <ion-grid class="p-0"><ion-row>
-    <ion-col class="p-0" sizeXl="4" sizeMd="6" *ngFor="let product of products | productsByCategory: filterCategory | sortBy: filterSort">
+    <ion-col class="p-0" sizeXl="4" sizeMd="6" 
+    *ngFor="let product of products | productsByCategory: filterCategory | sortBy: filterSort | filterProduct: search">
 
       <ion-card>
         <ion-product-grid [product]="product"></ion-product-grid>

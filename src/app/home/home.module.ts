@@ -8,7 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { PopoverModule } from '../shared/popovers/popover.module';
-import { PipeModule } from '../shared/pipes/pipe.module';
+import { AppPipeModule } from '../shared/pipes/app-pipe.module';
 import { AppIonModule } from '../shared/components/app-ion.module';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { AppIonModule } from '../shared/components/app-ion.module';
     AppIonModule,
     HomePageRoutingModule,
     PopoverModule,
-    PipeModule,
+    AppPipeModule,
   ],
   declarations: [HomePage]
 })

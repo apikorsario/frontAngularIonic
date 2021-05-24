@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Usuario</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-user [user]="user"></ion-user>
+
+  <ion-card>
+    <ion-card-header color="light">
+      <ion-card-title>Restablecer Contraceña</ion-card-title>
+    </ion-card-header>
+    <ion-item [formGroup]="formForgotPassword">
+      <ion-input type="password" formControlName="newPassword" placeholder="Nueva Contraceña:"></ion-input>
+      <ion-button *ngIf="!saving; else btnSpinner" (click)="clickedForgotPassword()" fill="clear">
+        Aceptar
+      </ion-button>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item button (click)="closeModal('invoices')">
+      <ion-label>Ver Facturas</ion-label>
+      <ion-icon slot="end" name="open"></ion-icon>
+    </ion-item>
+  </ion-card>
+
+</ion-content>
+
+<ng-template #btnSpinner>
+  <ion-button fill="clear">
+    Procesando...
+    <ion-spinner></ion-spinner>
+  </ion-button>
+</ng-template>

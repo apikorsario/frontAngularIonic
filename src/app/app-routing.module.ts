@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { NetworkGuard } from './shared/guards/network.guard';
 import { NoAuth } from './shared/guards/no-auth.guard';
 
 const routes: Routes = [
@@ -10,23 +11,28 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'error',
+    loadChildren: () => import('./error/error.module').then(m => m.ErrorModule)
+  },
+  {
+    path: 'home',
+    canActivate: [NetworkGuard],
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },
+  {
     path: 'sign-in',
-    canActivate: [NoAuth],
+    canActivate: [NoAuth, NetworkGuard],
     loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule)
   },
   {
     path: 'sign-up',
-    canActivate: [NoAuth],
+    canActivate: [NoAuth, NetworkGuard],
     loadChildren: () => import('./sign-up/sign-up.module').then( m => m.SignUpPageModule)
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
     path: 'auth',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule)
+    canActivate: [AuthGuard, NetworkGuard],
+    loadChildren: () => import('./_auth/auth.module').then( m => m.AuthModule)
   },
 ];
 

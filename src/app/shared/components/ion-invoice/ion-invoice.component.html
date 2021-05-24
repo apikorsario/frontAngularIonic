@@ -1,0 +1,64 @@
+<ion-card>
+
+  <div *ngIf="invoice.products.length">
+    <ion-card-header color="medium">
+      <ion-card-subtitle class="t-ellipsis">
+        <small>
+          {{ invoice.invoiceId }}
+        </small>
+      </ion-card-subtitle>
+      <ion-card-subtitle class="f j-between a-center">
+        <p class="m-0">Fecha:</p>
+        <p class="m-0 t-ellipsis">{{ invoice.createdDate | date: 'd, MMM, y, hh:mm, a' : 'Z' }}</p>
+      </ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-item class="capitalize">
+      <ion-label>
+        <p>Vendedor:</p>
+      </ion-label>
+      <p>{{ invoice.employee.firstName }} {{ invoice.employee.lastName }}</p>
+    </ion-item>
+  
+    <ion-item class="capitalize">
+      <ion-label>
+        <p>Comprador:</p>
+      </ion-label>
+      <p>{{ invoice.customer.firstName }} {{ invoice.customer.lastName }}</p>
+    </ion-item>
+  
+    <ion-item class="capitalize">
+      <ion-label>
+        <p>metodo de Pago:</p>
+      </ion-label>
+      <p>{{ invoice.payment.methodName }}</p>
+    </ion-item>
+  
+    <ion-item lines="none">
+      <ion-label>
+        <p>Productos:</p>
+      </ion-label>
+      <ion-chip (click)="showProducts = !showProducts" color="primary">
+        <ion-label>{{ invoice?.itemCount }}</ion-label>
+        <ion-icon *ngIf="!showProducts" name="chevron-down"></ion-icon>
+        <ion-icon *ngIf="showProducts" name="chevron-up"></ion-icon>
+      </ion-chip>
+    </ion-item>
+
+    <ion-card-content class="pl-0" *ngIf="showProducts">
+      <ion-item color="ligth" *ngFor="let detail of invoice.products">
+        <ion-label class="capitalize">
+          {{ detail.product.productName }}
+          <p class="m-0 t-medium font-10">Cantidad: {{ detail.quantity }}</p>
+          <p class="m-0 t-medium font-10">Precio: {{ detail.unitPrice | currency }}</p>
+        </ion-label>
+        <ion-note color="dark" class="pt-10">Sub Total: {{ detail.total | currency }}</ion-note>
+      </ion-item>
+    </ion-card-content>
+
+    <ion-card-header class="f j-between a-center">
+      <ion-card-title>Total:</ion-card-title>
+      <ion-card-title>{{ invoice.total | currency}}</ion-card-title>
+    </ion-card-header>
+  </div>
+</ion-card>

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Usuarios</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar name="search" [(ngModel)]="search" placeholder="Buscar Usuario" searchIcon="search"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid class="p-0"><ion-row>
+    <ion-col class="p-0" offsetMd="2" sizeMd="8" offsetXs="0" sizeXs="12" *ngFor="let user of users | filterUser: search">
+      <ion-user button (click)="clickedUser(user)" [user]="user"></ion-user>
+    </ion-col>
+  </ion-row></ion-grid>
+
+</ion-content>

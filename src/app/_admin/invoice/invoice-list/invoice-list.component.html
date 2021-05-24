@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Facturaciónes</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-chip routerLink="/auth/admin/invoices/create">
+        <ion-label>Generar</ion-label>
+        <ion-icon color="primary" name="create"></ion-icon>
+      </ion-chip>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <ion-grid class="p-0"><ion-row>
+    <ion-col class="p-0" offsetSm="1" sizeSm="10" sizeXs="12" offsetLg="0" sizeLg="6" *ngFor="let invoice of invoices">
+      <ion-invoice [invoice]="invoice"></ion-invoice>
+    </ion-col>
+  </ion-row></ion-grid>
+
+</ion-content>

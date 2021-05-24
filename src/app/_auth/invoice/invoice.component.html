@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>invoices</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="invoices && invoices.length; else invoicesEmpty">
+    <ion-grid class="p-0"><ion-row>
+      <ion-col class="p-0" offsetSm="1" sizeSm="10" sizeXs="12" offsetLg="0" sizeLg="6" *ngFor="let invoice of invoices">
+        <ion-invoice [invoice]="invoice"></ion-invoice>
+      </ion-col>
+    </ion-row></ion-grid>
+  </div>
+
+  
+
+</ion-content>
+
+<ng-template #invoicesEmpty>
+  <div class="w-100 h-100 f j-center a-center">
+    <ion-card *ngIf="!isLoad">
+      <ion-card-header class="capitalize">
+        has tu primera compra!
+        <a routerLink="/" routerDirection="root">Ir de Compras</a>
+      </ion-card-header>
+    </ion-card>
+  </div>
+</ng-template>
+
+<ng-template #btnSpinner>
+  <ion-button fill="clear" size="small" color="primary">
+    <ion-spinner></ion-spinner>
+  </ion-button>
+</ng-template>

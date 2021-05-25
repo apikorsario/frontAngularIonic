@@ -73,7 +73,8 @@ export class HomePage implements OnInit {
     )
   }
 
-  refreshLocker(event: any) {
+  async refreshLocker(event: any) {
+    if (!await this._authService.isLogged()) return;
     this._lockerService.getLocker().subscribe(
       res => {
         this.locker = res.data;

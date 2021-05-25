@@ -28,8 +28,6 @@ export class InvoiceComponent implements OnInit {
     (await this._loadingCtrl.create()).present();
     this.subscription = this._invoiceService.getInvoices().subscribe(
       res => {
-        console.log(res.data);
-        
         this.invoices = res.data;
         this.isLoad = false;
         this._loadingCtrl.dismiss();

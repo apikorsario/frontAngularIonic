@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, ModalController, NavController } from '@ionic/angular';
 import { IInvoiceRes } from 'src/app/shared/interfaces/responses/invoice-res';
 import { IUserRes } from 'src/app/shared/interfaces/responses/user-res';
 import { AdminInvoiceService } from 'src/app/shared/services/admin/admin-invoice.service';
@@ -21,12 +21,12 @@ export class UserInvoiceComponent implements OnInit {
     private _adminUsersService: AdminUsersService,
     private _activatedRoute: ActivatedRoute,
     private _loadingCtrl: LoadingController,
-    private _navCtrl: NavController
+    private _navCtrl: NavController,
+    private _modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
     this.loadUser();
-    this.loadInvoices();
   }
 
   async loadUser() {
@@ -34,12 +34,11 @@ export class UserInvoiceComponent implements OnInit {
     let userId = this._activatedRoute.snapshot.paramMap.get('userId');
     this._adminUsersService.getUserById(userId).subscribe(
       res => {
+        this._loadingCtrl.dismiss();
         this.user = res.data;
         this.loadInvoices();
-        this._loadingCtrl.dismiss();
       },
       err => {
-        console.log(err);
         this._loadingCtrl.dismiss();
         this._navCtrl.navigateRoot('/auth/admin/users');
       }
@@ -50,20 +49,15 @@ export class UserInvoiceComponent implements OnInit {
     this.loadingInvoices = true;
     this._adminInvoiceService.getInvoices().subscribe(
       res => {
-        this.invoices = res.data;
-        this.filterInvoicesByUser();
         this.loadingInvoices = false;
+        this.invoices = res.data
+          .filter(i => i.products.length > 0)
+          .filter(i => i.customer.customerId == this.user.userId);
       },
       err => {
-        this.invoices = null;
         this.loadingInvoices = false;
+        this.invoices = null;
       }
     )
-  }
-
-  filterInvoicesByUser() {
-    this.invoices = this.invoices
-      .filter(i => i.products.length > 0)
-      .filter(i => i.customer.customerId == this.user.userId)
   }
 }

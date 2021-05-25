@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
     this._userService.getProfile().subscribe(
       res => {
         this.user = res.data;
-        this.avatar = this._gravatarService.url(this.user.email, 200, 'wavatar');
+        this.avatar = this._gravatarService.url(this.user.email, 200, 'identicon');
       },
       err => console.log(err)
     )

@@ -17,7 +17,7 @@ export class IonUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user.avatar = this._gravatarService.url(this.user.email, 100, 'wavatar')
+    this.user.avatar = this._gravatarService.url(this.user.email, 100, 'identicon')
   }
 
 }

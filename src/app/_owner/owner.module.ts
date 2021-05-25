@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { OwnerRoutingModule } from './owner-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AppIonModule } from '../shared/components/app-ion.module';
 import { AssignRoleComponent } from './assign-role/assign-role.component';
@@ -18,6 +18,7 @@ import { AppPipeModule } from '../shared/pipes/app-pipe.module';
   imports: [
     CommonModule,
     OwnerRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     IonicModule,
     AppIonModule,

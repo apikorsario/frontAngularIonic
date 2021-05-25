@@ -19,7 +19,7 @@ import { NetworkInterceptor } from './shared/interceptors/network.interceptor';
     IonicModule.forRoot(), 
     AppRoutingModule,
     HttpClientModule,
-    GravatarModule
+    GravatarModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

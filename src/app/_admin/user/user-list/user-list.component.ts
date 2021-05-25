@@ -58,8 +58,7 @@ export class UserListComponent implements OnInit {
     modal.present();
     let res = await modal.onWillDismiss();
     if (res.role == 'invoices') {
-      let path = '/auth/admin/users/invoices/';
-      this._navCtrl.navigateForward(path , { queryParams: { userId: user.userId } });
+      this._navCtrl.navigateForward(`/auth/admin/users/invoices/${user.userId}`);
     }
   }
 }

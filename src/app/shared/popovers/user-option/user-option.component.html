@@ -5,7 +5,7 @@
         </ion-label>
     </ion-list-header>
 
-    <ion-item (click)="clickedOption(option)" class="capitalize t-white" button *ngFor="let option of popOptions">
+    <ion-item (click)="clickedOption(option)" class="capitalize" button *ngFor="let option of popOptions">
         <ion-icon slot="end" [name]="option.icon" color="primary"></ion-icon>
         <ion-label>
             <h3>{{ option.title }}</h3>

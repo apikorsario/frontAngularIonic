@@ -87,17 +87,14 @@ export class InvoiceCreateComponent implements OnInit {
 
 
   async clickedSave() {
-
-    if (this.formInvoice.get('paymentId').invalid) {
-      return ToastModel.showError('debe seleccionar un metodo de pago');
-    }
-
-    if (this.formInvoice.get('paymentId').invalid) {
-      return ToastModel.showError('debe seleccionar un metodo de pago');
-    }
-
+    
     if (this.formInvoice.get('customerId').invalid) {
+      this.formInvoice.markAllAsTouched();
       return ToastModel.showError('debe agregar un id de usuario valido');
+    }
+
+    if (this.formInvoice.get('paymentId').invalid) {
+      return ToastModel.showError('debe seleccionar un metodo de pago');
     }
 
     ;(await this._loadingCtrl.create()).present();

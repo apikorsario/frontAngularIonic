@@ -4,6 +4,11 @@ import { AssignRoleComponent } from './assign-role/assign-role.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'assign-roles',
+    pathMatch: 'full'
+  },
+  {
     path: 'assign-roles',
     component: AssignRoleComponent
   }

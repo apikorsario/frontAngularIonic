@@ -2,10 +2,6 @@
   <ion-toolbar>
     <ion-title>Mi Codigo Qr</ion-title>
 
-    <ion-buttons *ngIf="!openFromModal" slot="start">
-      <ion-back-button text="" defaultHref="/"></ion-back-button>
-    </ion-buttons>
-
     <ion-buttons *ngIf="openFromModal" slot="end">
       <ion-button (click)="closeModal()">
         <ion-icon name="close" slot="icon-only"></ion-icon>

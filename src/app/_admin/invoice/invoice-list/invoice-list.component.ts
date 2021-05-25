@@ -26,7 +26,6 @@ export class InvoiceListComponent implements OnInit {
 
     this._adminInvoiceService.getInvoices().subscribe(
       res => {
-        console.log(res);
         this.invoices = res.data;
         this._loadingCtrl.dismiss();
       },

@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { InvoiceRoutingModule } from './invoice-routing.module';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 import { InvoiceCreateComponent } from './invoice-create/invoice-create.component';
-import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchUserComponent } from './search-user/search-user.component';
 import { AppIonModule } from 'src/app/shared/components/app-ion.module';
@@ -16,7 +15,6 @@ import { IonicModule } from '@ionic/angular';
   declarations: [
     InvoiceListComponent,
     InvoiceCreateComponent,
-    InvoiceDetailComponent,
     SearchUserComponent
   ],
   imports: [

@@ -8,12 +8,14 @@ import { AppIonModule } from 'src/app/shared/components/app-ion.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppPipeModule } from 'src/app/shared/pipes/app-pipe.module';
 import { UserOptionsComponent } from './user-options/user-options.component';
+import { UserInvoiceComponent } from './user-invoice/user-invoice.component';
 
 
 @NgModule({
   declarations: [
     UserListComponent,
-    UserOptionsComponent
+    UserOptionsComponent,
+    UserInvoiceComponent
   ],
   imports: [
     CommonModule,

@@ -8,6 +8,8 @@ import { IInvoiceRes } from '../../interfaces/responses/invoice-res';
 export class IonInvoiceComponent implements OnInit {
 
   @Input() invoice: IInvoiceRes;
+  @Input() button: string;
+  @Input() detail: boolean;
   public showProducts: boolean;
 
   constructor() { }

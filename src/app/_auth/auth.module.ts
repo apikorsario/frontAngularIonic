@@ -7,9 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { AppIonModule } from '../shared/components/app-ion.module';
 import { ProfileComponent } from './profile/profile.component';
 import { LockerComponent } from './locker/locker.component';
+import { QrCodeModule } from 'ng-qrcode';
 import { QrCodeComponent } from './qr-code/qr-code.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { QrCodeModule } from 'ng-qrcode';
+import { UserOptionComponent } from '../shared/popovers/user-option/user-option.component';
+import { ChangePasswordComponent } from '../shared/modals/change-password/change-password.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { QrCodeModule } from 'ng-qrcode';
     ProfileComponent,
     LockerComponent,
     QrCodeComponent,
-    InvoiceComponent
+    InvoiceComponent,
+    UserOptionComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,

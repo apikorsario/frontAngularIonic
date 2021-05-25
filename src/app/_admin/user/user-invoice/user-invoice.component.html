@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Facturas de Usuario</ion-title>
+    <ion-title>Facturas del Usuario</ion-title>
 
     <ion-buttons slot="start">
       <ion-back-button text="" defaultHref="/auth/admin/users"></ion-back-button>
@@ -18,7 +18,7 @@
       <ion-spinner *ngIf="loadingInvoices"></ion-spinner>
     </ion-card-header>
 
-    <ion-card-content *ngIf="invoices && invoice.length; else invoicesEmpty">
+    <ion-card-content *ngIf="invoices && invoices.length; else invoicesEmpty">
       <ion-invoice [invoice]="invoice" *ngFor="let invoice of invoices"></ion-invoice>
     </ion-card-content>
   </ion-card>
@@ -26,7 +26,7 @@
 </ion-content>
 
 <ng-template #invoicesEmpty>
-  <ion-card-content>
-    <ion-card-subtitle>{{ user.firstName }} no tiene facturas!</ion-card-subtitle>
+  <ion-card-content *ngIf="user && !loadingInvoices">
+    <ion-card-subtitle class="capitalize">{{ user.firstName }} no tiene facturas!</ion-card-subtitle>
   </ion-card-content>
 </ng-template>

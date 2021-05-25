@@ -1,4 +1,4 @@
-<ion-card>
+<ion-card [button]="button">
 
   <div *ngIf="invoice.products.length">
     <ion-card-header color="medium">
@@ -34,7 +34,7 @@
       <p>{{ invoice.payment.methodName }}</p>
     </ion-item>
   
-    <ion-item lines="none">
+    <ion-item *ngIf="!detail; else widhCardTitle" lines="none">
       <ion-label>
         <p>Productos:</p>
       </ion-label>
@@ -45,7 +45,7 @@
       </ion-chip>
     </ion-item>
 
-    <ion-card-content class="pl-0" *ngIf="showProducts">
+    <ion-card-content class="pl-0" *ngIf="showProducts || detail">
       <ion-item color="ligth" *ngFor="let detail of invoice.products">
         <ion-label class="capitalize">
           {{ detail.product.productName }}
@@ -62,3 +62,9 @@
     </ion-card-header>
   </div>
 </ion-card>
+
+<ng-template #widhCardTitle>
+  <ion-card-header>
+    <ion-card-title>Productos:</ion-card-title>
+  </ion-card-header>
+</ng-template>

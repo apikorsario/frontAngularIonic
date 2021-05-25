@@ -7,9 +7,10 @@
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button [disabled]="creating" (click)="clickedCreateCategory()">
-        <ion-icon name="save" slot="icon-only"></ion-icon>
-      </ion-button>
+      <ion-chip [disabled]="creating" (click)="clickedCreateCategory()">
+        <ion-label>Guardar</ion-label>
+        <ion-icon name="save" color="primary"></ion-icon>
+      </ion-chip>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -48,11 +49,4 @@
       </ion-row>
     </ion-grid>
   </ion-card>
-
-  <div class="f j-center">
-    <ion-button [disabled]="creating" (click)="clickedCreateCategory()">
-      Aceptar
-    </ion-button>
-  </div>
-
 </ion-content>

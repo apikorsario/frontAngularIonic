@@ -54,6 +54,6 @@ export class UserOptionsComponent implements OnInit {
   }
 
   closeModal(role?:string) {
-    this._modalCtrl.dismiss(null, role);
+    this._modalCtrl.dismiss(this.user.userId, role);
   }
 }

@@ -21,6 +21,7 @@ export class HomePage implements OnInit {
   public filterCategory: ICategoryRes;
   public filterSort: ISortOption;
   public locker: ILockerRes;
+  public search: string;
 
   constructor(
     private _productService: ProductService,
@@ -57,12 +58,12 @@ export class HomePage implements OnInit {
     )
   }
 
-  doRefresh(event: CustomEvent) {
+  doRefresh(event: any) {
     this.refreshLocker(event);
     this.refreshProduct(event);
   }
 
-  refreshProduct(event: CustomEvent) {
+  refreshProduct(event: any) {
     this._productService.getProducts().subscribe(
       res => {
         this.products = res.data;
@@ -72,7 +73,7 @@ export class HomePage implements OnInit {
     )
   }
 
-  refreshLocker(event: CustomEvent) {
+  refreshLocker(event: any) {
     this._lockerService.getLocker().subscribe(
       res => {
         this.locker = res.data;

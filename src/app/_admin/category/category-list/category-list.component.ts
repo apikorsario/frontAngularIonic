@@ -37,7 +37,7 @@ export class CategoryListComponent implements OnInit {
     )
   }
 
-  doRefresh(event: CustomEvent) {
+  doRefresh(event: any) {
     this._categoryService.getCategories().subscribe(
       res => {
         this.categories = res.data;

@@ -9,4 +9,7 @@ export interface IProductRes {
   productName: string;
   stock: number;
   unitPrice: number;
+  checked?: boolean;
+  adding?: boolean;
+  removing?: boolean;
 }

@@ -11,6 +11,7 @@ import { UserRoleComponent } from '../user-role/user-role.component';
 export class AssignRoleComponent implements OnInit {
 
   public users: Array<IUserRes>;
+  public search: string;
 
   constructor(
     private _adminUsersService: AdminUsersService,

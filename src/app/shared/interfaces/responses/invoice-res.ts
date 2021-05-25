@@ -10,4 +10,5 @@ export interface IInvoiceRes {
   payment: IPaymentRes;
   products: null | Array<IInvoiceDetailRes>;
   total: number;
+  itemCount: number;
 }

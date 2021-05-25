@@ -44,7 +44,7 @@ export class LockerComponent implements OnInit {
     )
   }
 
-  doRefresh($event?: CustomEvent) {
+  doRefresh($event?: any) {
     this.subscription.unsubscribe();
     this._lockerService.getLocker().subscribe(
       res => {

@@ -11,6 +11,7 @@ import { UserOptionsComponent } from '../user-options/user-options.component';
 export class UserListComponent implements OnInit {
 
   public users: Array<IUserRes>;
+  public search: string;
 
   constructor(
     private _adminUserService: AdminUsersService,
@@ -37,7 +38,7 @@ export class UserListComponent implements OnInit {
     )
   }
 
-  doRefresh(event: CustomEvent) {
+  doRefresh(event: any) {
     this._adminUserService.getUsers().subscribe(
       res => {
         this.users = res.data;

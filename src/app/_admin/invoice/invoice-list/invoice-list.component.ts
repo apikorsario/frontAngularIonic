@@ -36,7 +36,7 @@ export class InvoiceListComponent implements OnInit {
     )
   }
   
-  doRefresh(event: CustomEvent) {
+  doRefresh(event: any) {
     this._adminInvoiceService.getInvoices().subscribe(
       res => {
         event.detail.complete();

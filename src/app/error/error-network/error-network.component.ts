@@ -13,7 +13,7 @@ export class ErrorNetwork implements OnInit {
 
   ngOnInit() {}
 
-  doRefresh(event: CustomEvent) {
+  doRefresh(event: any) {
     this._navCtrl.navigateRoot('/');
     event.detail.complete();
   }

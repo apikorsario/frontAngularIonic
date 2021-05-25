@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 export class ProductListComponent implements OnInit {
 
   public products: Array<IProductRes>;
+  public search: string;
 
   constructor(
     private _productService: ProductService,
@@ -35,7 +36,7 @@ export class ProductListComponent implements OnInit {
     )
   }
   
-  doRefresh(event: CustomEvent) {
+  doRefresh(event: any) {
     this._productService.getProducts().subscribe(
       res => {
         this.products = res.data;

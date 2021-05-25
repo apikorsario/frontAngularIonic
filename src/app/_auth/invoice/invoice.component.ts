@@ -39,7 +39,7 @@ export class InvoiceComponent implements OnInit {
     )
   }
 
-  toRefresh(event?: CustomEvent) {
+  doRefresh(event?: any) {
     this.subscription.unsubscribe();
     this.subscription = this._invoiceService.getInvoices().subscribe(
       res => {

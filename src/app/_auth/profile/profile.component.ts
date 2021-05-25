@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
     )
   }
 
-  doRefresh(event: CustomEvent) {
+  doRefresh(event: any) {
     this.doRefreshUser(event);
     this.doRefreshLocker(event);
     this.doRefreshInvoices(event);

@@ -62,7 +62,7 @@
                         <ion-icon name="add-circle-outline" slot="icon-only"></ion-icon>
                       </ion-button>
 
-                      <ion-button fill="clear" size="small" *ngIf="!detail.deleting; else btnSpinner" (click)="clickedRemoveDetail(detail, detail.quantity)">
+                      <ion-button fill="clear" size="small" *ngIf="!detail.deleting; else btnSpinner" (click)="clickedRemoveDetail(detail, true)">
                         <ion-icon name="close-circle" slot="icon-only"></ion-icon>
                       </ion-button>
                     </div>

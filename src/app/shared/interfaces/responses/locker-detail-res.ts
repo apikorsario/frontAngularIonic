@@ -3,4 +3,7 @@ export interface ILockerDetailRes {
   product: IDetailProductRes;
   quantity: number;
   total: number;
+  removing?: boolean;
+  adding?: boolean;
+  deleting?: boolean;
 }

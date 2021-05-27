@@ -49,10 +49,10 @@
       <ion-item color="ligth" *ngFor="let detail of invoice.products">
         <ion-label class="capitalize">
           {{ detail.product.productName }}
-          <p class="m-0 t-medium font-10">Cantidad: {{ detail.quantity }}</p>
-          <p class="m-0 t-medium font-10">Precio: {{ detail.unitPrice | currency }}</p>
+          <p class="m-0 font-10">Cantidad: {{ detail.quantity }}</p>
+          <p class="m-0 font-10">Precio: {{ detail.unitPrice | currency }}</p>
         </ion-label>
-        <ion-note color="dark" class="pt-10">Sub Total: {{ detail.total | currency }}</ion-note>
+        <ion-note class="pt-10">Sub Total: {{ detail.total | currency }}</ion-note>
       </ion-item>
     </ion-card-content>
 

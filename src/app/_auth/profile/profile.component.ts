@@ -71,7 +71,7 @@ export class ProfileComponent implements OnInit {
 
   loadInvoices() {
     this.invoiceSubs = this._invoiceService.getInvoices().subscribe(
-      res => this.invoices = res.data
+      res => this.invoices = res.data.filter(i => i.products.length > 0)
     )
   }
 
@@ -107,7 +107,7 @@ export class ProfileComponent implements OnInit {
     this.invoiceSubs.unsubscribe();
     this.invoiceSubs = this._invoiceService.getInvoices().subscribe(
       res => {
-        this.invoices = res.data;
+        this.invoices = res.data.filter(i => i.products.length > 0);
         event?.detail.complete();
       },
       err => event?.detail.complete()

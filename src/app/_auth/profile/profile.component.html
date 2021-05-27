@@ -20,7 +20,7 @@
     <ion-user class="f-grow" *ngIf="user" [user]="user"></ion-user>
 
    
-    <ion-card class="f-grow" *ngIf="locker">
+    <ion-card button routerLink="/auth/locker" class="f-grow" *ngIf="locker">
       <ion-card-header class="pb-0">
         <ion-card-title class="capitalize">Casillero</ion-card-title>
       </ion-card-header>
@@ -38,7 +38,7 @@
       </div>
     </ion-card>
    
-    <ion-card class="f-grow" *ngIf="invoices">
+    <ion-card button routerLink="/auth/invoices" class="f-grow" *ngIf="invoices">
       <ion-card-header class="pb-0">
         <ion-card-title class="capitalize">Facturas</ion-card-title>
       </ion-card-header>

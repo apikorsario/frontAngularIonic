@@ -9,7 +9,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "electron:mac": "electron-packager ./electron KorsarioApp --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds",
+    "electron:win": "electron-packager ./electron KorsarioApp --overwrite --asar=true --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='Jorge Guanipa App'"
   },
   "private": true,
   "dependencies": {
@@ -24,7 +26,9 @@
     "@capacitor/ios": "^2.4.7",
     "@infinitycube/gravatar": "^2.0.6",
     "@ionic/angular": "^5.5.2",
+    "electron": "^13.0.1",
     "ng-qrcode": "^4.2.0",
+    "ngx-electron": "^2.2.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -47,6 +51,7 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "4.16.1",
+    "electron-packager": "^15.2.0",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
